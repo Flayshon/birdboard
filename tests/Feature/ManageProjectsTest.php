@@ -6,6 +6,9 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
+use App\Project;
+use phpDocumentor\Reflection\Types\This;
+
 class ManageProjectsTest extends TestCase
 {
     use WithFaker, RefreshDatabase;
@@ -26,26 +29,32 @@ class ManageProjectsTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $this->actingAs(factory('App\User')->create());
+        $this->signIn();
         
-        $project = [
+        $attributes = [
             'title' => $this->faker->sentence,
-            'description' => $this->faker->paragraph
+            'description' => $this->faker->sentence,
+            'notes'=> 'General notes here.'
+
         ];
 
         $this->get('/projects/create')->assertStatus(200);
         
-        $this->post('/projects', $project)->assertRedirect('/projects');
+        $response = $this->post('/projects', $attributes);
 
-        $this->assertDatabaseHas('projects', $project);
+        $project = Project::where($attributes)->first();
 
-        $this->get('/projects')->assertSee($project['title']);
+        $response->assertRedirect($project->path());
+
+        $this->assertDatabaseHas('projects', $attributes);
+
+        $this->get('/projects')->assertSee($attributes['title']);
     }
 
     /** @test */
     public function a_project_requires_a_title()
     {
-        $this->actingAs(factory('App\User')->create());
+        $this->signIn();
         
         $project = factory('App\Project')->raw(['title' => '']);
 
@@ -55,7 +64,7 @@ class ManageProjectsTest extends TestCase
     /** @test */
     public function a_project_requires_a_description()
     {
-        $this->actingAs(factory('App\User')->create());
+        $this->signIn();
         
         $project = factory('App\Project')->raw(['description' => '']);
 
