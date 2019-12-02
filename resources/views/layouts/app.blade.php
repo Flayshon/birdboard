@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
@@ -14,19 +14,21 @@
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body class="bg-grey-light">
+<body class="bg-grey-lighter">
     <div id="app">
-        <nav class="bg-white">
-            <div class="container mx-auto items-center py-2">
-                <div class="flex justify-between">
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        <img src="/images/logo.svg" alt="Birdboard">
-                    </a>
+        <nav class="bg-white section">
+            <div class="container mx-auto">
+                <div class="flex justify-between items-center py-1">
+                    <h1>
+                        <a class="navbar-brand" href="{{ url('/projects') }}">
+                            <img src="/images/logo.svg" alt="Birdboard" class="relative" style="top: 2px">
+                        </a>
+                    </h1>
 
                     <div>
                         <!-- Right Side Of Navbar -->
@@ -49,8 +51,8 @@
 
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                         <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                                        document.getElementById('logout-form').submit();">
+                                           onclick="event.preventDefault();
+                                                         document.getElementById('logout-form').submit();">
                                             {{ __('Logout') }}
                                         </a>
 
@@ -66,7 +68,7 @@
             </div>
         </nav>
 
-        <main class="container mx-auto py-4">
+        <main class="container mx-auto py-6 section">
             @yield('content')
         </main>
     </div>
