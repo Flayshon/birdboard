@@ -9,6 +9,7 @@
             action="{{ $project->path() }}"
         >
             @method('PATCH')
+            
             @include('projects.form', [
                 $buttonText = 'Update Project'
             ])
