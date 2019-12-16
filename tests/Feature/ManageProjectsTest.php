@@ -61,7 +61,6 @@ class ManageProjectsTest extends TestCase
 
         $project = ProjectFactory::create();
 
-
         $this->actingAs($project->owner)
             ->patch($project->path(), $attributes = ['title' => 'changed', 'description' => 'changed', 'notes' => 'changed'])
             ->assertRedirect($project->path());
