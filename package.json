@@ -23,5 +23,8 @@
         "sass-loader": "^7.1.0",
         "tailwindcss": "^0.7.4",
         "vue-template-compiler": "^2.6.10"
+    },
+    "dependencies": {
+        "serialize-javascript": "^2.1.2"
     }
 }
